@@ -138,4 +138,4 @@ def sendMSG(policanCas):
                     print(f"pohuzel pan {user} si polican zablokoval :(")
                     del(line)
                     
-bot.run('NzEyMDI3Njk5MzA4MjY1NTI0.XsLleA.FYHIsOaDHtYpWcmZMrRkVct7kGI')
+
