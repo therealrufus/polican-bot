@@ -128,7 +128,7 @@ async def time_loop():
         if (current_time > 1700) and (current_time < 2100):
             sendMSG('C:/Users/Filip/Documents/Discord/poličan-bot/vecerni_polican.jpg')
             
-def sendMSG(policanCas):
+async def sendMSG(policanCas):
     with open("C:/Users/Filip/Documents/Discord/poličan-bot/poli-seznam.txt", "r+") as f:
             for line in f:
                 user = await bot.fetch_user(line)
