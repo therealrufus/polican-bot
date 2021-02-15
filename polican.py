@@ -24,7 +24,7 @@ async def on_message(message):
         return
 
     if message.content.find('polican') != -1:
-        with open("C:/Users/Filip/Documents/Discord/poličan-bot/poli-seznam.txt", "r+") as f:
+        with open("poli-seznam.txt", "r+") as f:
             for user in message.mentions:
                 print(user)
                 if f"{str(user.id)}\n" not in f:
@@ -44,7 +44,7 @@ async def on_message(message):
     if message.content.find('polican') != -1:
         if message.content.find('pls') != -1:
             await message.add_reaction("😋")
-            with open("C:/Users/Filip/Documents/Discord/poličan-bot/poli-seznam.txt", "r+") as f:
+            with open("poli-seznam.txt", "r+") as f:
                 if f"{str(message.author.id)}\n" not in f:
                     f.write(f"{str(message.author.id)}\n")
                     f.close
@@ -52,11 +52,11 @@ async def on_message(message):
     if message.content.find('debug') != -1:
         if message.content.find('pls') != -1:
             await message.add_reaction("😋")
-            with open("C:/Users/Filip/Documents/Discord/poličan-bot/debug-seznam.txt", "r+") as f:
+            with open("debug-seznam.txt", "r+") as f:
                 for line in f:
                     user = await bot.fetch_user(line)
                     try:
-                        await user.send(file=discord.File('C:/Users/Filip/Documents/Discord/poličan-bot/pulnocni_polican.jpg'))                    
+                        await user.send(file=discord.File('pulnocni_polican.jpg'))                    
                     except:
                         print(f"pohuzel pan {user} si polican zablokoval :(")
                         del(line)
@@ -65,7 +65,7 @@ async def on_message(message):
     # OGUREC
 
     if message.content.find('ogurec') != -1:
-        with open("C:/Users/Filip/Documents/Discord/poličan-bot/gurec-seznam.txt", "r+") as f:
+        with open("gurec-seznam.txt", "r+") as f:
             for user in message.mentions:
                 print(user)
                 if f"{str(user.id)}\n" not in f:
@@ -85,7 +85,7 @@ async def on_message(message):
     if message.content.find('ogurec') != -1:
         if message.content.find('pls') != -1:
             await message.add_reaction("😋")
-            with open("C:/Users/Filip/Documents/Discord/poličan-bot/gurec-seznam.txt", "r+") as f:
+            with open("gurec-seznam.txt", "r+") as f:
                 if f"{str(message.author.id)}\n" not in f:
                     f.write(f"{str(message.author.id)}\n")
                     f.close
@@ -97,47 +97,44 @@ async def time_loop():
     current_time = now.strftime("%H:%M")
     print(current_time)
     if current_time == "00:00":
-        with open("C:/Users/Filip/Documents/Discord/poličan-bot/poli-seznam.txt", "r+") as f:
+        with open("poli-seznam.txt", "r+") as f:
             for line in f:
                 user = await bot.fetch_user(line)
                 try:
-                    await user.send(file=discord.File('C:/Users/Filip/Documents/Discord/poličan-bot/pulnocni_polican.jpg'))                    
+                    await user.send(file=discord.File('pulnocni_polican.jpg'))                    
                 except:
                     print(f"pohuzel pan {user} si polican zablokoval :(")
-                    del(line)
-        with open("C:/Users/Filip/Documents/Discord/poličan-bot/gurec-seznam.txt", "r+") as f:
+        with open("gurec-seznam.txt", "r+") as f:
             for line in f:
                 user = await bot.fetch_user(line)
                 try:
-                    await user.send(file=discord.File('C:/Users/Filip/Documents/Discord/poličan-bot/ogurec.jpg'))                    
+                    await user.send(file=discord.File('ogurec.jpg'))                    
                 except:
                     print(f"pohuzel pan {user} si ogurec zablokoval :(")
-                    del(line)
     #zacatek noveho kodu
     elif random.randrange(0, 4000) == 9:
         InTime = int((current_time).replace(':', ''))
         print(InTime)
         if (InTime > 0) and (InTime < 900):
-            await sendMSG('C:/Users/Filip/Documents/Discord/poličan-bot/ranni_polican.jpg')
+            await sendMSG('ranni_polican.jpg')
         if (InTime > 900) and (InTime < 1100):
-            await sendMSG('C:/Users/Filip/Documents/Discord/poličan-bot/dopoledni_polican.jpg')
+            await sendMSG('dopoledni_polican.jpg')
         if (InTime > 1100) and (InTime < 1300):
-            await sendMSG('C:/Users/Filip/Documents/Discord/poličan-bot/poledni_polican.jpg')
+            await sendMSG('poledni_polican.jpg')
         if (InTime > 1300) and (InTime < 1700):
-            await sendMSG('C:/Users/Filip/Documents/Discord/poličan-bot/odpoledni_polican.jpg')
+            await sendMSG('odpoledni_polican.jpg')
         if (InTime > 1700) and (InTime < 2100):
-            await sendMSG('C:/Users/Filip/Documents/Discord/poličan-bot/vecerni_polican.jpg')
+            await sendMSG('vecerni_polican.jpg')
             
 async def sendMSG(policanCas):
     print("random polican expedovan")
-    with open("C:/Users/Filip/Documents/Discord/poličan-bot/poli-seznam.txt", "r+") as f:
+    with open("poli-seznam.txt", "r+") as f:
             for line in f:
                 user = await bot.fetch_user(line)
                 try:
                     await user.send(file=discord.File(policanCas))                    
                 except:
                     print(f"pohuzel pan {user} si polican zablokoval :(")
-                    del(line)
                 return
 with open('token.txt') as f:
     for line in f:
