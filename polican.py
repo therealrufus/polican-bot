@@ -3,6 +3,7 @@ import os
 import discord
 import time
 import random
+from re import search
 from datetime import datetime
 from discord.ext import commands
 from discord.ext.commands import Bot
@@ -45,9 +46,14 @@ async def on_message(message):
         if message.content.find('pls') != -1:
             await message.add_reaction("😋")
             with open("poli-seznam.txt", "r+") as f:
-                if f"{str(message.author.id)}\n" not in f:
-                    f.write(f"{user} {str(message.author.id)}\n")
-                    f.close
+                print(str(message.author.id))
+                print(f.read().replace('\n', ' '))
+                if "ahoj" not in str(f.read().replace('\n', ' ')):
+                    f.write(f"{message.author} {str(message.author.id)}\n")
+                    print(message.author)
+                else:
+                    await message.channel.send(f"{message.author.mention} už jsi poličaned!")
+                f.close
 
     if message.content.find('debug') != -1:
         if message.content.find('pls') != -1:
@@ -61,36 +67,6 @@ async def on_message(message):
                         print(f"pohuzel pan {user} si polican zablokoval :(")
                         del(line)
             
-
-    # OGUREC
-
-    if message.content.find('ogurec') != -1:
-        with open("gurec-seznam.txt", "r+") as f:
-            for user in message.mentions:
-                if f"{str(user.id)}\n" not in f:
-                    await message.channel.send(f"{user.mention} just got ogurec'd!")
-                    f.write(f"{user} {str(user.id)}\n")
-                    print(user)
-                else:
-                    await message.channel.send(f"{user.mention} už ogurec užívá")
-            f.close
-
-    if message.content.find('ogurec') != -1:
-        if message.content.find('info') != -1:
-            await message.add_reaction("🤔")
-            mbed = discord.Embed(title='Chcete SALENIJ OGUREC?',
-                                 description='pokud chcete půlnoční ogurec, napište do chatu ogurec pls\npokd chcete nekoho ogurcovat, napište ogurec @někdo', colour=discord.Color.green())
-            await message.channel.send(embed=mbed)
-
-    if message.content.find('ogurec') != -1:
-        if message.content.find('pls') != -1:
-            await message.add_reaction("😋")
-            with open("gurec-seznam.txt", "r+") as f:
-                if f"{user} {str(message.author.id)}\n" not in f:
-                    f.write(f"{str(message.author.id)}\n")
-                    f.close
-
-
 @tasks.loop(seconds=60)
 async def time_loop():
     now = datetime.now()
