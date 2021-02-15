@@ -26,10 +26,10 @@ async def on_message(message):
     if message.content.find('polican') != -1:
         with open("poli-seznam.txt", "r+") as f:
             for user in message.mentions:
-                print(user)
                 if f"{str(user.id)}\n" not in f:
                     await message.channel.send(f"{user.mention} just got poličan'd!")
-                    f.write(f"{str(user.id)}\n")
+                    f.write(f"{user} {str(user.id)}\n")
+                    print(user)
                 else:
                     await message.channel.send(f"{user.mention} už poličan užívá")
             f.close
@@ -46,7 +46,7 @@ async def on_message(message):
             await message.add_reaction("😋")
             with open("poli-seznam.txt", "r+") as f:
                 if f"{str(message.author.id)}\n" not in f:
-                    f.write(f"{str(message.author.id)}\n")
+                    f.write(f"{user} {str(message.author.id)}\n")
                     f.close
 
     if message.content.find('debug') != -1:
@@ -54,7 +54,7 @@ async def on_message(message):
             await message.add_reaction("😋")
             with open("debug-seznam.txt", "r+") as f:
                 for line in f:
-                    user = await bot.fetch_user(line)
+                    user = await bot.fetch_user(re.sub('^(.* )',"", line))
                     try:
                         await user.send(file=discord.File('pulnocni_polican.jpg'))                    
                     except:
@@ -67,10 +67,10 @@ async def on_message(message):
     if message.content.find('ogurec') != -1:
         with open("gurec-seznam.txt", "r+") as f:
             for user in message.mentions:
-                print(user)
                 if f"{str(user.id)}\n" not in f:
                     await message.channel.send(f"{user.mention} just got ogurec'd!")
-                    f.write(f"{str(user.id)}\n")
+                    f.write(f"{user} {str(user.id)}\n")
+                    print(user)
                 else:
                     await message.channel.send(f"{user.mention} už ogurec užívá")
             f.close
@@ -86,7 +86,7 @@ async def on_message(message):
         if message.content.find('pls') != -1:
             await message.add_reaction("😋")
             with open("gurec-seznam.txt", "r+") as f:
-                if f"{str(message.author.id)}\n" not in f:
+                if f"{user} {str(message.author.id)}\n" not in f:
                     f.write(f"{str(message.author.id)}\n")
                     f.close
 
@@ -99,14 +99,14 @@ async def time_loop():
     if current_time == "00:00":
         with open("poli-seznam.txt", "r+") as f:
             for line in f:
-                user = await bot.fetch_user(line)
+                user = await bot.fetch_user(re.sub('^(.* )',"", line))
                 try:
                     await user.send(file=discord.File('pulnocni_polican.jpg'))                    
                 except:
                     print(f"pohuzel pan {user} si polican zablokoval :(")
         with open("gurec-seznam.txt", "r+") as f:
             for line in f:
-                user = await bot.fetch_user(line)
+                user = await bot.fetch_user(re.sub('^(.* )',"", line))
                 try:
                     await user.send(file=discord.File('ogurec.jpg'))                    
                 except:
@@ -130,7 +130,7 @@ async def sendMSG(policanCas):
     print("random polican expedovan")
     with open("poli-seznam.txt", "r+") as f:
             for line in f:
-                user = await bot.fetch_user(line)
+                user = await bot.fetch_user(re.sub('^(.* )',"", line))
                 try:
                     await user.send(file=discord.File(policanCas))                    
                 except:
