@@ -46,9 +46,7 @@ async def on_message(message):
         if message.content.find('pls') != -1:
             await message.add_reaction("😋")
             with open("poli-seznam.txt", "r+") as f:
-                print(str(message.author.id))
-                print(f.read().replace('\n', ' '))
-                if "ahoj" not in str(f.read().replace('\n', ' ')):
+                if str(message.author.id) not in str(f.read()):
                     f.write(f"{message.author} {str(message.author.id)}\n")
                     print(message.author)
                 else:
