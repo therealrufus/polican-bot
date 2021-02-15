@@ -114,21 +114,22 @@ async def time_loop():
                     print(f"pohuzel pan {user} si ogurec zablokoval :(")
                     del(line)
     #zacatek noveho kodu
-    elif random.randrange(0,4000) == 420: #haha humerus
+    elif random.randrange(0, 4000) == 9:
         InTime = int((current_time).replace(':', ''))
         print(InTime)
-        if (current_time > 0) and (current_time < 900):
-            sendMSG('C:/Users/Filip/Documents/Discord/poličan-bot/ranni_polican.jpg')
-        if (current_time > 900) and (current_time < 1100):
-            sendMSG('C:/Users/Filip/Documents/Discord/poličan-bot/dopoledni_polican.jpg')
-        if (current_time > 1100) and (current_time < 1300):
-            sendMSG('C:/Users/Filip/Documents/Discord/poličan-bot/poledni_polican.jpg')
-        if (current_time > 1300) and (current_time < 1700):
-            sendMSG('C:/Users/Filip/Documents/Discord/poličan-bot/odpoledni_polican.jpg')
-        if (current_time > 1700) and (current_time < 2100):
-            sendMSG('C:/Users/Filip/Documents/Discord/poličan-bot/vecerni_polican.jpg')
+        if (InTime > 0) and (InTime < 900):
+            await sendMSG('C:/Users/Filip/Documents/Discord/poličan-bot/ranni_polican.jpg')
+        if (InTime > 900) and (InTime < 1100):
+            await sendMSG('C:/Users/Filip/Documents/Discord/poličan-bot/dopoledni_polican.jpg')
+        if (InTime > 1100) and (InTime < 1300):
+            await sendMSG('C:/Users/Filip/Documents/Discord/poličan-bot/poledni_polican.jpg')
+        if (InTime > 1300) and (InTime < 1700):
+            await sendMSG('C:/Users/Filip/Documents/Discord/poličan-bot/odpoledni_polican.jpg')
+        if (InTime > 1700) and (InTime < 2100):
+            await sendMSG('C:/Users/Filip/Documents/Discord/poličan-bot/vecerni_polican.jpg')
             
 async def sendMSG(policanCas):
+    print("random polican expedovan")
     with open("C:/Users/Filip/Documents/Discord/poličan-bot/poli-seznam.txt", "r+") as f:
             for line in f:
                 user = await bot.fetch_user(line)
@@ -137,5 +138,11 @@ async def sendMSG(policanCas):
                 except:
                     print(f"pohuzel pan {user} si polican zablokoval :(")
                     del(line)
+                return
+with open('token.txt') as f:
+    for line in f:
+        token = line
+
+bot.run(token)
                     
 
