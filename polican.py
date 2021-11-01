@@ -114,6 +114,4 @@ with open('token.txt') as f:
     for line in f:
         token = line
 
-bot.run(token)
-                    
-
+bot.run(token) 
